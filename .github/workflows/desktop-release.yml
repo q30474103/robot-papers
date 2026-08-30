@@ -43,11 +43,32 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec install-electron
-      - run: pnpm electron:linux
+      - run: pnpm electron:linux:formats
+      - name: Build AppImage
+        env:
+          APPIMAGE_EXTRACT_AND_RUN: '1'
+          ARCH: x86_64
+          VERSION: ${{ github.ref_name }}
+        run: |
+          curl --fail --location --retry 3 \
+            --output /tmp/appimagetool \
+            https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
+          echo 'ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0  /tmp/appimagetool' | sha256sum --check
+          chmod +x /tmp/appimagetool
+          /tmp/appimagetool release/Robot-Papers.AppDir release/Robot-Papers-x86_64.AppImage
+      - name: Verify Linux packages
+        run: |
+          test -s release/Robot-Papers-linux-x64.tar.gz
+          test -s release/Robot-Papers-linux-amd64.deb
+          test -s release/Robot-Papers-x86_64.AppImage
+          dpkg-deb --info release/Robot-Papers-linux-amd64.deb
       - uses: actions/upload-artifact@v4
         with:
           name: robot-papers-linux
-          path: release/Robot-Papers-linux-x64.tar.gz
+          path: |
+            release/Robot-Papers-linux-x64.tar.gz
+            release/Robot-Papers-linux-amd64.deb
+            release/Robot-Papers-x86_64.AppImage
 
   release:
     needs: [windows, linux]
@@ -59,7 +80,12 @@ jobs:
           merge-multiple: true
       - run: |
           cd release
-          sha256sum Robot-Papers-Setup.exe Robot-Papers-linux-x64.tar.gz > SHA256SUMS.txt
+          sha256sum \
+            Robot-Papers-Setup.exe \
+            Robot-Papers-linux-x64.tar.gz \
+            Robot-Papers-linux-amd64.deb \
+            Robot-Papers-x86_64.AppImage \
+            > SHA256SUMS.txt
       - env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
@@ -68,6 +94,8 @@ jobs:
           gh release create "$TAG" \
             release/Robot-Papers-Setup.exe \
             release/Robot-Papers-linux-x64.tar.gz \
+            release/Robot-Papers-linux-amd64.deb \
+            release/Robot-Papers-x86_64.AppImage \
             release/SHA256SUMS.txt \
             --repo "$REPOSITORY" \
             --verify-tag \

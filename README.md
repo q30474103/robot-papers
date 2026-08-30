@@ -10,6 +10,8 @@ Robot Papers 是一个本地优先的具身智能论文阅读与整理工具，�
 ## 下载
 
 - [Windows 安装包](https://github.com/zzw-rgb/robot-papers/releases/latest/download/Robot-Papers-Setup.exe)
+- [Ubuntu / Debian 安装包（.deb）](https://github.com/zzw-rgb/robot-papers/releases/latest/download/Robot-Papers-linux-amd64.deb)
+- [通用 Linux AppImage](https://github.com/zzw-rgb/robot-papers/releases/latest/download/Robot-Papers-x86_64.AppImage)
 - [Linux x86_64 便携包](https://github.com/zzw-rgb/robot-papers/releases/latest/download/Robot-Papers-linux-x64.tar.gz)
 
 Windows 安装后可在引导页选择论文库目录，默认使用 `D:\paper`；Linux 默认使用 `~/Robot-Papers`，也可通过 `ROBOT_PAPERS_ROOT` 指定。Linux 启动方式见 [Linux 使用说明](README-Linux.md)，日报、周报和 Codex 联动配置见 [新设备配置指南](docs/NEW_DEVICE_SETUP.md)。
@@ -95,10 +97,10 @@ pnpm electron:package
 pnpm electron:installer
 ```
 
-在 Linux x86_64 环境生成便携包：
+在 Linux x86_64 环境生成 `.deb`、AppImage 目录和便携包：
 
 ```bash
-pnpm electron:linux
+pnpm electron:linux:formats
 ```
 
 构建产物保存在 `release`，不会提交到源码仓库。详细使用说明见 [README-桌面版.md](README-桌面版.md)。
