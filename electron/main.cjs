@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu, Tray, dialog, net, protocol, session, shell, ipcMain } = require('electron');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { DEFAULT_AI_PROMPT } = require('./ai-defaults.cjs');
@@ -18,7 +19,10 @@ protocol.registerSchemesAsPrivileged([
   },
 ]);
 
-let PAPER_ROOT = process.env.ROBOT_PAPERS_ROOT || 'D:\\paper';
+const DEFAULT_PAPER_ROOT = process.platform === 'win32'
+  ? 'D:\\paper'
+  : path.join(os.homedir(), 'Robot-Papers');
+let PAPER_ROOT = process.env.ROBOT_PAPERS_ROOT || DEFAULT_PAPER_ROOT;
 let APP_CONFIG = { paperRoot: PAPER_ROOT, ai: {} };
 let mainWindow = null;
 let tray = null;
@@ -379,7 +383,7 @@ function secureWindowOptions(extra = {}) {
   return {
     backgroundColor: '#f5f7fb',
     autoHideMenuBar: true,
-    icon: appResource('assets', 'robot-papers-icon.ico'),
+    icon: appResource('assets', process.platform === 'win32' ? 'robot-papers-icon.ico' : 'robot-papers-icon.png'),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
@@ -450,7 +454,7 @@ async function refreshLibrary() {
 }
 
 function createTray() {
-  tray = new Tray(appResource('assets', 'robot-papers-icon.ico'));
+  tray = new Tray(appResource('assets', process.platform === 'win32' ? 'robot-papers-icon.ico' : 'robot-papers-icon.png'));
   tray.setToolTip('Robot Papers · 具身智能论文库');
   tray.setContextMenu(Menu.buildFromTemplate([
     { label: '打开 Robot Papers', click: () => { mainWindow?.show(); mainWindow?.focus(); } },

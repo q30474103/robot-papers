@@ -1,0 +1,73 @@
+name: Build desktop release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm electron:installer
+      - shell: pwsh
+        run: Copy-Item -LiteralPath 'release\Robot Papers-Setup.exe' -Destination 'release\Robot-Papers-Setup.exe'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robot-papers-windows
+          path: release/Robot-Papers-Setup.exe
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm electron:linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: robot-papers-linux
+          path: release/Robot-Papers-linux-x64.tar.gz
+
+  release:
+    needs: [windows, linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release
+          merge-multiple: true
+      - run: |
+          cd release
+          sha256sum Robot-Papers-Setup.exe Robot-Papers-linux-x64.tar.gz > SHA256SUMS.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          gh release create "$TAG" \
+            release/Robot-Papers-Setup.exe \
+            release/Robot-Papers-linux-x64.tar.gz \
+            release/SHA256SUMS.txt \
+            --repo "$REPOSITORY" \
+            --verify-tag \
+            --title "Robot Papers $TAG" \
+            --generate-notes

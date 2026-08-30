@@ -1,7 +1,7 @@
 {
   "name": "robot-papers",
   "productName": "Robot Papers",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "本地优先的具身智能论文阅读与研读周报桌面应用",
   "author": "Robot Papers",
   "license": "MIT",
@@ -19,6 +19,7 @@
     "electron:dev": "pnpm build:electron && electron .",
     "electron:package": "pnpm build:electron && node scripts/package-electron.mjs",
     "electron:installer": "pnpm electron:package && node scripts/create-installer.mjs",
+    "electron:linux": "pnpm build:electron && node scripts/package-electron-linux.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },

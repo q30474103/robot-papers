@@ -1,4 +1,4 @@
-# Robot Papers 桌面版
+# Robot Papers Windows 桌面版
 
 Robot Papers 现在提供 Windows Electron 桌面版。它直接读取本机的 `D:\paper`，不会把论文上传到网站服务器。
 
@@ -42,3 +42,5 @@ Robot Papers 现在提供 Windows Electron 桌面版。它直接读取本机的 
 AI 只分析已经进入本地论文库的资料。论文搜索、下载 PDF 和提取图片属于上游采集任务；如果上游当天没有获取到真实论文，软件不会凭空生成论文内容。安装向导默认创建 Windows 登录启动快捷方式，以便定时检查持续运行。
 
 当前版本为未签名便携式 Windows 应用，首次运行时 Windows 可能显示来源提示；这是签名证书尚未配置造成的，不影响本地使用。
+
+Linux 用户请查看 [README-Linux.md](README-Linux.md)。
