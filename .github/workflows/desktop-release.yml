@@ -22,9 +22,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec install-electron
+      - run: choco install innosetup --yes --no-progress
       - run: pnpm electron:installer
-      - shell: pwsh
-        run: Copy-Item -LiteralPath 'release\Robot Papers-Setup.exe' -Destination 'release\Robot-Papers-Setup.exe'
       - uses: actions/upload-artifact@v4
         with:
           name: robot-papers-windows
