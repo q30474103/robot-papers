@@ -1,6 +1,26 @@
 # Robot Papers
 
+[![Release](https://img.shields.io/github/v/release/zzw-rgb/robot-papers?display_name=tag&sort=semver)](https://github.com/zzw-rgb/robot-papers/releases/latest)
+[![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?logo=windows)](https://github.com/zzw-rgb/robot-papers/releases/latest)
+[![License](https://img.shields.io/github/license/zzw-rgb/robot-papers)](LICENSE)
+
 Robot Papers 是一个本地优先的具身智能论文阅读与整理工具，提供 Web 界面和 Windows Electron 桌面版。它从本地论文库生成可检索的阅读工作台，支持按推荐日期、研究方向和方法筛选论文，并展示论文图解、优点、局限性和后续研究机会。
+
+## 下载
+
+[下载最新版 Windows 安装包](https://github.com/zzw-rgb/robot-papers/releases/latest/download/Robot-Papers-Setup.exe)
+
+安装后可在引导页选择论文库目录；默认使用 `D:\paper`。新设备的日报、周报和 Codex 联动配置见 [新设备配置指南](docs/NEW_DEVICE_SETUP.md)。
+
+## 界面预览
+
+### 论文工作台
+
+![Robot Papers 论文工作台](docs/screenshots/dashboard.png)
+
+### 论文分析页
+
+![Robot Papers 论文分析页](docs/screenshots/paper-detail.png)
 
 ## 功能
 
