@@ -21,6 +21,7 @@ jobs:
           node-version: 22.13.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec install-electron
       - run: pnpm electron:installer
       - shell: pwsh
         run: Copy-Item -LiteralPath 'release\Robot Papers-Setup.exe' -Destination 'release\Robot-Papers-Setup.exe'
@@ -41,6 +42,7 @@ jobs:
           node-version: 22.13.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec install-electron
       - run: pnpm electron:linux
       - uses: actions/upload-artifact@v4
         with:
