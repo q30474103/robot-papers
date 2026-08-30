@@ -1,7 +1,7 @@
 {
   "name": "robot-papers",
   "productName": "Robot Papers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "本地优先的具身智能论文阅读与研读周报桌面应用",
   "author": "Robot Papers",
   "license": "MIT",
